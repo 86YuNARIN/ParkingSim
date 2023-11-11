@@ -5,8 +5,8 @@ using UnityEngine;
 public class CarSpawn : MonoBehaviour
 {
     [SerializeField] SimManager _simManager;
-    //[SerializeField] GameObject _gameObject;  spawnpoint 
-    //[SerializeField] GameObject _gameObject2; car
+    [SerializeField] GameObject[] _spawnPoints;
+    [SerializeField] GameObject _cars;
 
     // TODO change into dynamic spawn rate {get set}
     float _spawnTimer = 2f;
@@ -22,8 +22,8 @@ public class CarSpawn : MonoBehaviour
 
     IEnumerator SpawnNextCar()
     {
-        //int nextSpawnLocation = Random.Range(0, _spawnPoints.Length);
-        //Instantiate(_car , spawnPoint[nextSpawnLocation].transform.position, Quaternion.identify);
+        int nextSpawnLocation = Random.Range(0, _spawnPoints.Length);
+        Instantiate(_cars , _spawnPoints[nextSpawnLocation].transform.position, Quaternion.identity);
         yield return new WaitForSeconds(_spawnTimer);
                
         StartCoroutine(SpawnNextCar());
