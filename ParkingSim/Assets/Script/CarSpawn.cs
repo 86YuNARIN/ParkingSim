@@ -6,7 +6,7 @@ public class CarSpawn : MonoBehaviour
 {
     [SerializeField] SimManager _simManager;
     [SerializeField] GameObject[] _spawnPoints;
-    [SerializeField] GameObject _cars;
+    [SerializeField] GameObject[] _cars;
 
     // TODO change into dynamic spawn rate {get set}
     float _spawnTimer = 2f;
@@ -23,7 +23,8 @@ public class CarSpawn : MonoBehaviour
     IEnumerator SpawnNextCar()
     {
         int nextSpawnLocation = Random.Range(0, _spawnPoints.Length);
-        Instantiate(_cars , _spawnPoints[nextSpawnLocation].transform.position, Quaternion.identity);
+        int nextCarModel = Random.Range(0, _cars.Length);
+        Instantiate(_cars[nextCarModel] , _spawnPoints[nextSpawnLocation].transform.position, Quaternion.identity);
         yield return new WaitForSeconds(_spawnTimer);
                
         StartCoroutine(SpawnNextCar());
