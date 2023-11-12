@@ -513,7 +513,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7720db6d3ba9bb44aa5547feb478a834, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movePositionTransform: {fileID: 406510223027894075, guid: dd73f7af0a0b2694d8221894767185e8, type: 3}
+  movePositionTransform: {fileID: 8108044827374871692, guid: c91665e7c3fa13d43a6a41f9f190820d, type: 3}
 --- !u!1 &7642791978380020456
 GameObject:
   m_ObjectHideFlags: 0
