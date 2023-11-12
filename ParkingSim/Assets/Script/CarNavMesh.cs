@@ -22,9 +22,12 @@ public class CarNavMesh : MonoBehaviour
 
             //if (mainRoadInstance == null)
             //{
-                // Do something with despawnRoadTransform
-                // For example, set the destination of the nav mesh agent
-                navMeshAgent.destination = mainRoadInstance.transform.position;
+            // Do something with despawnRoadTransform
+            // For example, set the destination of the nav mesh agent
+            navMeshAgent.destination = mainRoadInstance.transform.position;
+
+            navMeshAgent.speed = 300f;
+            navMeshAgent.acceleration = 1000f;
             //}
             //else
             //{
