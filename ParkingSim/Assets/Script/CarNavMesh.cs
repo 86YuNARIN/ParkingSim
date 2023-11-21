@@ -49,27 +49,5 @@ public class CarNavMesh : MonoBehaviour
     void Update()
     { }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        // Check if the entering object has a specific tag (you can customize this)
-        if (other.CompareTag("Player"))
-        {
-            // Deactivate the entering object (make it disappear)
-            other.gameObject.SetActive(false);
 
-            // If you want to move the object to another location instead, you can use:
-            // other.gameObject.transform.position = new Vector3(x, y, z);
-        }
-    }
-
-    /*private void OnTriggerEnter(Collider other)
-    {
-        // Check if the entering object has a specific tag (you can customize this)
-        if (other.CompareTag("Player"))
-        {
-            // Make the entering object disappear
-            Destroy(other.gameObject);
-        }
-    }
-    */
 }
