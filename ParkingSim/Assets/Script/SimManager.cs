@@ -5,11 +5,24 @@ using UnityEngine;
 public class SimManager : MonoBehaviour
 {
     private int _currentHour = 0;
+    private int _successfulPark = 0; 
+    private int _unSuccessfulPark = 0;
 
     public int CurrentHour
     {
-        get { return _currentHour; }
+        get { return _currentHour/30; } //assume 30frame per minit
         set { _currentHour = value; }
+    }
+
+    public int SuccessfulPark
+    {
+        get { return _successfulPark; }
+        set { _successfulPark = value; }
+    }
+    public int UnSuccessfulPark
+    {
+        get { return _unSuccessfulPark; }
+        set { _unSuccessfulPark = value; }
     }
 
     // Start is called before the first frame update
@@ -24,10 +37,10 @@ public class SimManager : MonoBehaviour
     {
         // Increment the current hour each frame
         _currentHour++;
-        Debug.Log("Simulation hours: " + _currentHour);
+        //Debug.Log("Simulation hours: " + CurrentHour);
 
         // Check if the simulation should stop when CurrentHour reaches 2400
-        if (_currentHour >= 2400)
+        if (CurrentHour >= 1440)
         {
             // Implement any logic you need for stopping the simulation
             // For example, you can pause the game, display a summary, or exit the application
