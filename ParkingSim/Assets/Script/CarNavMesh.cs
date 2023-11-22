@@ -19,6 +19,9 @@ public class CarNavMesh : MonoBehaviour
 
     void Start()
     {
+        int carLayer = LayerMask.NameToLayer("Car");
+        // Ignore collisions between objects in the "Car" layer
+        Physics.IgnoreLayerCollision(carLayer, carLayer);
         navMeshAgent = gameObject.GetComponent<NavMeshAgent>();
         //parkingLots = GameObject.FindGameObjectsWithTag("ParkingSpace");
         availableParkingSpaces.AddRange(GameObject.FindGameObjectsWithTag("ParkingSpace"));
@@ -123,8 +126,8 @@ public class CarNavMesh : MonoBehaviour
                 //   Debug.Log("Hello haha");
                 float randomDelay = Random.Range(15.0f, 30.0f); // Change values to your preferred range
                 Invoke("MoveToDespawn", randomDelay); // Invoke MoveToDespawn method after randomDelay seconds
-                availableParkingSpaces.Add(nearestParkingSpace);
-                nearestParkingSpace.tag = "ParkingSpace";
+                //availableParkingSpaces.Add(nearestParkingSpace);
+                //nearestParkingSpace.tag = "ParkingSpace";
             }
 
             // if (remainingDistance < 0.1f) // Check for a very close distance to the 'Despawn' location
@@ -153,6 +156,24 @@ public class CarNavMesh : MonoBehaviour
             }
             GameObject.Destroy(gameObject);
         }
+
+        
         
     }
+
+//     private void OnTriggerExit(Collider other)
+// {
+//     Debug.Log("Exited trigger");
+    
+//     // Check if the exited collider has the tag "ParkingSpace"
+//     if (other.CompareTag("ParkingSpace"))
+//     {
+//         // Add the parking space back to the available list
+//         availableParkingSpaces.Add(other.gameObject);
+
+//         // Change the tag of the exited parking spot to "ParkingSpace"
+//         other.gameObject.tag = "ParkingSpace";
+//     }
+// }
+
 }

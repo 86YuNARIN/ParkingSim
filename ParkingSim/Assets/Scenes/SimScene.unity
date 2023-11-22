@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -474,19 +474,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8b90580340198143814b553501cdce4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _simManager: {fileID: 1933261749}
   _spawnPoints:
   - {fileID: 937639441}
   _cars:
   - {fileID: 4150509835923955680, guid: da5331e7ba659404b9ff535bdb952a26, type: 3}
-  - {fileID: 2927824777045439683, guid: 6b90d2f35f783f549bad344f85c6c868, type: 3}
-  - {fileID: 5234982537029631074, guid: 0749cd639cd2c54409b7962db822a4c6, type: 3}
-  - {fileID: 4661265850182535028, guid: 9dc6274cf8d69a54fb6157d8e2c612bf, type: 3}
-  - {fileID: 6915069652379692674, guid: f366ce7651e9fae4e9287ff9fde3bf33, type: 3}
-  - {fileID: 5878128180739366620, guid: bf3f3903432d97a438e65f664221feed, type: 3}
-  - {fileID: 7367451096153902220, guid: da560d44e15f70349a55137d03617b94, type: 3}
-  - {fileID: 1383188167277446660, guid: 77bfb351c6971df4c9a0f2360158081b, type: 3}
-  - {fileID: 4087507283629871978, guid: 8b43f7dbd0ea06d42b6e9a0e42a6c0f6, type: 3}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0

@@ -24,9 +24,17 @@ public class CarSpawn : MonoBehaviour
         int nextCarModel = Random.Range(0, _cars.Length);
 
         Vector3 spawnPosition = _spawnPoints[nextSpawnLocation].transform.position;
-        spawnPosition.y = 26.9f;
+        
 
         GameObject newCar = Instantiate(_cars[nextCarModel], _spawnPoints[nextSpawnLocation].transform.position, Quaternion.identity);
+        if (newCar.CompareTag("Car"))
+    {
+        Debug.Log("Hey");
+        Vector3 newPos = newCar.transform.position;
+        newPos.y = 23f; // Set the Y position to 23 for objects with the "Car" tag
+        newCar.transform.position = newPos;
+    }
+        newCar.layer = LayerMask.NameToLayer("Car");
 
         Rigidbody rigidbody = newCar.GetComponent<Rigidbody>();
         if (rigidbody == null)
@@ -34,6 +42,12 @@ public class CarSpawn : MonoBehaviour
         rigidbody = newCar.AddComponent<Rigidbody>();
         rigidbody.useGravity = false; // Disable gravity for the rigidbody
         rigidbody.angularDrag = 0f; // Set angular drag to 0
+
+        rigidbody.drag = 5f; // Adjust linear drag value (experiment with values)
+        rigidbody.angularDrag = 5f; // Adjust angular drag value (experiment with values)
+        // Freeze rotation along certain axes if needed
+        rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
+        rigidbody.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
 
         rigidbody.centerOfMass = Vector3.zero; // Set center of mass manually (optional)
         rigidbody.inertiaTensor = Vector3.zero; // Set inertia tensor manually (optional)
@@ -75,9 +89,9 @@ public class CarSpawn : MonoBehaviour
 
     #region GetSpawnRate
     // Define different spawn rates for peak, normal, and less busy hours
-    private float peakHourSpawnRate = 0.1f;
-    private float normalHourSpawnRate = 0.05f;
-    private float lessBusyHourSpawnRate = 0.02f;
+    private float peakHourSpawnRate = 2f;
+    private float normalHourSpawnRate = 1.5f;
+    private float lessBusyHourSpawnRate = 1f;
 
     // Example method to get the spawn rate based on the current hour or simulation state
     public float GetSpawnRate()
