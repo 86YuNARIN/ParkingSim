@@ -29,7 +29,6 @@ public class CarSpawn : MonoBehaviour
         GameObject newCar = Instantiate(_cars[nextCarModel], _spawnPoints[nextSpawnLocation].transform.position, Quaternion.identity);
         if (newCar.CompareTag("Car"))
     {
-        Debug.Log("Hey");
         Vector3 newPos = newCar.transform.position;
         newPos.y = 23f; // Set the Y position to 23 for objects with the "Car" tag
         newCar.transform.position = newPos;
