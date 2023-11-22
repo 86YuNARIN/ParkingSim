@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: 93bf9ee7dd53ce04984d4c35d8f7d5d4, type: 2}
 --- !u!1 &351324206
 GameObject:
   m_ObjectHideFlags: 0
@@ -1205,7 +1205,7 @@ MonoBehaviour:
   rearRightWheelTransform: {fileID: 686061790}
   maxSteeringAngle: 50
   motorForce: 250
-  turboBoostFactor: 500
+  turboBoostFactor: 100
   brakeForce: 0
 --- !u!65 &983291917
 BoxCollider:
@@ -1351,26 +1351,14 @@ GameObject:
   m_Component:
   - component: {fileID: 1137650152}
   - component: {fileID: 1137650151}
-  - component: {fileID: 1137650150}
+  - component: {fileID: 1137650153}
   m_Layer: 0
   m_Name: Despawn
-  m_TagString: Untagged
+  m_TagString: Despawn
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1137650150
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1137650149}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3001931eb0db5147bb5333e30f2d1b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &1137650151
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1387,7 +1375,7 @@ BoxCollider:
     m_Bits: 0
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
-  m_ProvidesContacts: 0
+  m_ProvidesContacts: 1
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 507.91547, y: 29.522642, z: 579.40155}
@@ -1407,6 +1395,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1137650153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1137650149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3001931eb0db5147bb5333e30f2d1b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1208982071
 GameObject:
   m_ObjectHideFlags: 0
@@ -1659,7 +1659,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f0c6971a82ea4f4198f69a78cb5cc2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset: {x: 20, y: 5, z: -10}
+  offset: {x: 0, y: 5, z: -10}
   target: {fileID: 983291915}
   translateSpeed: 10
   rotationSpeed: 10

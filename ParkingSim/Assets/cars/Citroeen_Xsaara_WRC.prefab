@@ -351,6 +351,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movePositionTransform: {fileID: 8108044827374871692, guid: c91665e7c3fa13d43a6a41f9f190820d, type: 3}
+  remainingDistance: 0
 --- !u!1 &5289657525179023816
 GameObject:
   m_ObjectHideFlags: 0

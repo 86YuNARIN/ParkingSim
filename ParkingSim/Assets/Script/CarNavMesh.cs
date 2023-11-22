@@ -10,6 +10,8 @@ public class CarNavMesh : MonoBehaviour
 
     private NavMeshAgent navMeshAgent;
 
+    public float remainingDistance;
+
     void Start()
     {
         // Assuming you have already dragged the MainRoad instance into the Unity Editor
@@ -43,11 +45,33 @@ public class CarNavMesh : MonoBehaviour
     public void Awake()
     {
         navMeshAgent = gameObject.GetComponent<NavMeshAgent>();
+        // If the NavMeshAgent component is not attached, add it
+        if (navMeshAgent == null)
+        {
+            navMeshAgent = gameObject.AddComponent<NavMeshAgent>();
+        }
     }
 
     // Update is called once per frame
     void Update()
-    { }
+    {
+        if (navMeshAgent.hasPath)
+        {
+            // Calculate remaining distance
+            remainingDistance = navMeshAgent.remainingDistance;
+
+            // Display remaining distance (you can replace this with your preferred way of displaying the information)
+            Debug.Log("Remaining Distance: " + remainingDistance);
+
+            // Check if remaining distance is almost zero and destroy the object
+            if (remainingDistance < 40.0f)
+            {
+                Destroy(gameObject);
+            }
+        }
+    }
+
+
 
 
 }
