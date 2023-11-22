@@ -7,34 +7,38 @@ using UnityEngine.AI;
 public class CarNavMesh : MonoBehaviour
 {
     [SerializeField] private GameObject movePositionTransform;
+    //[SerializeField] private float countdownTime = 30f;
 
     private NavMeshAgent navMeshAgent;
+    private List<GameObject> availableParkingSpaces = new List<GameObject>();
+    private float remainingDistance; // Declare remainingDistance here
+    private bool? isParked = null;
+    private float timer;
+    private GameObject previousParkingSpace;
 
-    public float remainingDistance;
 
     void Start()
     {
-        // Assuming you have already dragged the MainRoad instance into the Unity Editor
-        GameObject mainRoadInstance = GameObject.Find("Despawn"); // Change "MainRoad" to the actual name of your instance
+        navMeshAgent = gameObject.GetComponent<NavMeshAgent>();
+        //parkingLots = GameObject.FindGameObjectsWithTag("ParkingSpace");
+        availableParkingSpaces.AddRange(GameObject.FindGameObjectsWithTag("ParkingSpace"));
 
-        if (mainRoadInstance != null)
+        GameObject nearestParkingSpace = FindNearestAvailableParkingSpace();
+        if (nearestParkingSpace != null)
         {
             // Find the DespawnRoad within the MainRoad instance
             //Transform despawnRoadTransform = mainRoadInstance.transform.Find("Despawn Road");
-
             //if (mainRoadInstance == null)
             //{
             // Do something with despawnRoadTransform
             // For example, set the destination of the nav mesh agent
-            navMeshAgent.destination = mainRoadInstance.transform.position;
-
+            navMeshAgent.SetDestination(nearestParkingSpace.transform.position);
+            //navMeshAgent.destination = mainRoadInstance.transform.position;
             navMeshAgent.speed = 300f;
             navMeshAgent.acceleration = 1000f;
-            //}
-            //else
-            //{
-            //    Debug.LogError("DespawnRoad not found in MainRoad instance."); 
-            //}
+            availableParkingSpaces.Remove(nearestParkingSpace);
+            nearestParkingSpace.tag = "Untagged";
+            isParked = true;
         }
         else
         {
@@ -42,36 +46,110 @@ public class CarNavMesh : MonoBehaviour
         }
     }
 
+
+        GameObject FindNearestAvailableParkingSpace()
+    {
+            if (availableParkingSpaces.Count == 0)
+    {
+        // No available parking spaces, head towards the "Despawn" tagged object
+        GameObject despawnObject = GameObject.FindGameObjectWithTag("Despawn");
+        isParked = false;
+        if (despawnObject != null)
+        {
+            return despawnObject;
+        }
+        else
+        {
+            Debug.LogError("Despawn object not found in the scene.");
+            return null;
+        }
+    }
+    
+        GameObject nearestSpace = null;
+        float minDistance = Mathf.Infinity;
+        Vector3 currentPos = transform.position;
+
+        foreach (GameObject space in availableParkingSpaces)
+        {
+            float distance = Vector3.Distance(currentPos, space.transform.position);
+            if (distance < minDistance)
+            {
+                minDistance = distance;
+                nearestSpace = space;
+            }
+        }
+
+        return nearestSpace;
+    }
+
+
     public void Awake()
     {
         navMeshAgent = gameObject.GetComponent<NavMeshAgent>();
-        // If the NavMeshAgent component is not attached, add it
-        if (navMeshAgent == null)
-        {
-            navMeshAgent = gameObject.AddComponent<NavMeshAgent>();
-        }
     }
 
-    // Update is called once per frame
-    void Update()
+  void MoveToDespawn()
+{
+    GameObject despawnObject = GameObject.FindGameObjectWithTag("Despawn");
+
+    if (despawnObject != null)
     {
-        if (navMeshAgent.hasPath)
+        navMeshAgent.SetDestination(despawnObject.transform.position);
+        // Assuming you want to reset some properties when moving to the despawn point
+        //ResetCarProperties(); // Create this function to reset any necessary properties
+        Debug.Log("Moving to despawn area."); // Add a debug log here
+    }
+    else
+    {
+        Debug.LogError("Despawn object not found in the scene.");
+    }
+}
+
+void Update()
+    {
+        availableParkingSpaces.AddRange(GameObject.FindGameObjectsWithTag("ParkingSpace"));
+        GameObject nearestParkingSpace = FindNearestAvailableParkingSpace();
+        if (navMeshAgent.hasPath && (isParked != null))
         {
             // Calculate remaining distance
             remainingDistance = navMeshAgent.remainingDistance;
 
             // Display remaining distance (you can replace this with your preferred way of displaying the information)
-            Debug.Log("Remaining Distance: " + remainingDistance);
+            // Debug.Log("Remaining Distance: " + remainingDistance);
 
             // Check if remaining distance is almost zero and destroy the object
             if (remainingDistance < 40.0f)
             {
-                Destroy(gameObject);
+            //   Debug.Log("Hello haha");
+              float randomDelay = Random.Range(15.0f, 30.0f); // Change values to your preferred range
+              Invoke("MoveToDespawn", randomDelay); // Invoke MoveToDespawn method after randomDelay seconds
+              availableParkingSpaces.Add(nearestParkingSpace);
+              nearestParkingSpace.tag = "ParkingSpace";
             }
+
+            // if (remainingDistance < 0.1f) // Check for a very close distance to the 'Despawn' location
+            // {
+            // Debug.Log("Destroy");
+            // Destroy(gameObject); // Destroy the car GameObject
+            // }
+        }
+
+        if (navMeshAgent.hasPath && (isParked == null))
+        {
+
         }
     }
 
 
+    private void OnTriggerEnter(Collider collider){
+        Debug.Log("Collision happened");
+    }
 
+    private void OnTriggerExit(Collider other)
+     {
+    Debug.Log("Exited trigger");
+    // Your logic for when an object exits the trigger collider goes here
+     }
 
+    
 }

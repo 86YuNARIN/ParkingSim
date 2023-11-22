@@ -19,7 +19,31 @@ public class CarSpawn : MonoBehaviour
     {
         int nextSpawnLocation = Random.Range(0, _spawnPoints.Length);
         int nextCarModel = Random.Range(0, _cars.Length);
-        Instantiate(_cars[nextCarModel], _spawnPoints[nextSpawnLocation].transform.position, Quaternion.identity);
+
+        Vector3 spawnPosition = _spawnPoints[nextSpawnLocation].transform.position;
+        spawnPosition.y = 26.9f;
+
+        GameObject newCar = Instantiate(_cars[nextCarModel], _spawnPoints[nextSpawnLocation].transform.position, Quaternion.identity);
+
+        Rigidbody rigidbody = newCar.GetComponent<Rigidbody>();
+        if (rigidbody == null)
+        {
+        rigidbody = newCar.AddComponent<Rigidbody>();
+        rigidbody.useGravity = false; // Disable gravity for the rigidbody
+        rigidbody.angularDrag = 0f; // Set angular drag to 0
+
+        rigidbody.centerOfMass = Vector3.zero; // Set center of mass manually (optional)
+        rigidbody.inertiaTensor = Vector3.zero; // Set inertia tensor manually (optional)
+        rigidbody.inertiaTensorRotation = Quaternion.identity; // Set inertia tensor rotation manually (optio
+        }
+        // Add a BoxCollider component to the instantiated car
+        BoxCollider collider = newCar.GetComponent<BoxCollider>();
+        if (collider == null)
+        {
+            collider = newCar.AddComponent<BoxCollider>();
+            collider.size = new Vector3(1.72f, 0.54f, 2.87f);
+            collider.isTrigger = false; // Set the collider as a trigger for collision detection
+        }
 
         float nextSpawnDelay = GetNextSpawnDelay();
         yield return new WaitForSeconds(nextSpawnDelay);

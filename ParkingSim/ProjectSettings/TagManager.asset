@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Car
   - Despawn
+  - ParkingSpace
   layers:
   - Default
   - TransparentFX
