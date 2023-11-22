@@ -96,8 +96,7 @@ public class CarSpawn : MonoBehaviour
     // Example method to get the spawn rate based on the current hour or simulation state
     public float GetSpawnRate()
     {
-        int currentHour = GetCurrentHour(); // Implement a method to get the current hour or simulation state
-
+        int currentHour = GetCurrentHour() / 60;
         // Adjust spawn rate based on different hours or states
         if (IsPeakHour(currentHour))
         {
@@ -117,16 +116,16 @@ public class CarSpawn : MonoBehaviour
     private int GetCurrentHour()
     {
         // Return the current hour from SimManager
-        return _simManager.CurrentHour;
+        return _simManager.currentMinit;
     }
 
     // Example method to check if it's peak hour (replace this with your actual logic)
     private bool IsPeakHour(int hour)
     {
         // Implement the logic to check if it's peak hour
-        // For simplicity, consider peak hours from 8 AM to 10 AM in this example.
-        return hour >= 8 && hour < 10;
+        return (hour >= 8 && hour < 10) || (hour >= 18 && hour < 23);
     }
+
 
     // Example method to check if it's a normal hour (replace this with your actual logic)
     private bool IsNormalHour(int hour)

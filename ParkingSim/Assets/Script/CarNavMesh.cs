@@ -146,7 +146,6 @@ public class CarNavMesh : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Collision happened");
         if (other.CompareTag("Despawn"))
         {
             SimManager simManager = FindObjectOfType<SimManager>();
