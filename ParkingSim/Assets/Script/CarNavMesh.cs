@@ -47,24 +47,24 @@ public class CarNavMesh : MonoBehaviour
     }
 
 
-        GameObject FindNearestAvailableParkingSpace()
+    GameObject FindNearestAvailableParkingSpace()
     {
-            if (availableParkingSpaces.Count == 0)
-    {
-        // No available parking spaces, head towards the "Despawn" tagged object
-        GameObject despawnObject = GameObject.FindGameObjectWithTag("Despawn");
-        isParked = false;
-        if (despawnObject != null)
+        if (availableParkingSpaces.Count == 0)
         {
-            return despawnObject;
+            // No available parking spaces, head towards the "Despawn" tagged object
+            GameObject despawnObject = GameObject.FindGameObjectWithTag("Despawn");
+            isParked = false;
+            if (despawnObject != null)
+            {
+                return despawnObject;
+            }
+            else
+            {
+                Debug.LogError("Despawn object not found in the scene.");
+                return null;
+            }
         }
-        else
-        {
-            Debug.LogError("Despawn object not found in the scene.");
-            return null;
-        }
-    }
-    
+
         GameObject nearestSpace = null;
         float minDistance = Mathf.Infinity;
         Vector3 currentPos = transform.position;
@@ -88,24 +88,24 @@ public class CarNavMesh : MonoBehaviour
         navMeshAgent = gameObject.GetComponent<NavMeshAgent>();
     }
 
-  void MoveToDespawn()
-{
-    GameObject despawnObject = GameObject.FindGameObjectWithTag("Despawn");
-
-    if (despawnObject != null)
+    void MoveToDespawn()
     {
-        navMeshAgent.SetDestination(despawnObject.transform.position);
-        // Assuming you want to reset some properties when moving to the despawn point
-        //ResetCarProperties(); // Create this function to reset any necessary properties
-        Debug.Log("Moving to despawn area."); // Add a debug log here
-    }
-    else
-    {
-        Debug.LogError("Despawn object not found in the scene.");
-    }
-}
+        GameObject despawnObject = GameObject.FindGameObjectWithTag("Despawn");
 
-void Update()
+        if (despawnObject != null)
+        {
+            navMeshAgent.SetDestination(despawnObject.transform.position);
+            // Assuming you want to reset some properties when moving to the despawn point
+            //ResetCarProperties(); // Create this function to reset any necessary properties
+            Debug.Log("Moving to despawn area."); // Add a debug log here
+        }
+        else
+        {
+            Debug.LogError("Despawn object not found in the scene.");
+        }
+    }
+
+    void Update()
     {
         availableParkingSpaces.AddRange(GameObject.FindGameObjectsWithTag("ParkingSpace"));
         GameObject nearestParkingSpace = FindNearestAvailableParkingSpace();
@@ -120,11 +120,11 @@ void Update()
             // Check if remaining distance is almost zero and destroy the object
             if (remainingDistance < 40.0f)
             {
-            //   Debug.Log("Hello haha");
-              float randomDelay = Random.Range(15.0f, 30.0f); // Change values to your preferred range
-              Invoke("MoveToDespawn", randomDelay); // Invoke MoveToDespawn method after randomDelay seconds
-              availableParkingSpaces.Add(nearestParkingSpace);
-              nearestParkingSpace.tag = "ParkingSpace";
+                //   Debug.Log("Hello haha");
+                float randomDelay = Random.Range(15.0f, 30.0f); // Change values to your preferred range
+                Invoke("MoveToDespawn", randomDelay); // Invoke MoveToDespawn method after randomDelay seconds
+                availableParkingSpaces.Add(nearestParkingSpace);
+                nearestParkingSpace.tag = "ParkingSpace";
             }
 
             // if (remainingDistance < 0.1f) // Check for a very close distance to the 'Despawn' location
@@ -141,15 +141,18 @@ void Update()
     }
 
 
-    private void OnTriggerEnter(Collider collider){
+    private void OnTriggerEnter(Collider other)
+    {
         Debug.Log("Collision happened");
+        if (other.CompareTag("Despawn"))
+        {
+            SimManager simManager = FindObjectOfType<SimManager>();
+            if (simManager != null)
+            {
+                simManager.CarDespawned((bool)isParked);
+            }
+            GameObject.Destroy(gameObject);
+        }
+        
     }
-
-    private void OnTriggerExit(Collider other)
-     {
-    Debug.Log("Exited trigger");
-    // Your logic for when an object exits the trigger collider goes here
-     }
-
-    
 }

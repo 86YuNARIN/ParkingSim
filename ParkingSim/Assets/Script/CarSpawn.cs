@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class CarSpawn : MonoBehaviour
 {
-    [SerializeField] SimManager _simManager;
+    private SimManager _simManager;
     [SerializeField] GameObject[] _spawnPoints;
     [SerializeField] GameObject[] _cars;
 
     // Start is called before the first frame update
     void Start()
     {
+        // Find and assign the SimManager reference
+        _simManager = FindObjectOfType<SimManager>();
+
         StartCoroutine(SpawnNextCar());
         StartCoroutine(SpawnRateChanger());
     }

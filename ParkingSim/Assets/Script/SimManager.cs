@@ -25,6 +25,18 @@ public class SimManager : MonoBehaviour
         set { _unSuccessfulPark = value; }
     }
 
+    public void CarDespawned(bool isPark)
+    {
+        if (isPark)
+        {
+            SuccessfulPark++;
+        }
+        else
+        {
+            UnSuccessfulPark++;
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -49,4 +61,6 @@ public class SimManager : MonoBehaviour
             // Alternatively, you can implement other actions to conclude the simulation.
         }
     }
+
+
 }
