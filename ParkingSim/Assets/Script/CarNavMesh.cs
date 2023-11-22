@@ -117,24 +117,15 @@ public class CarNavMesh : MonoBehaviour
             // Calculate remaining distance
             remainingDistance = navMeshAgent.remainingDistance;
 
-            // Display remaining distance (you can replace this with your preferred way of displaying the information)
-            // Debug.Log("Remaining Distance: " + remainingDistance);
-
             // Check if remaining distance is almost zero and destroy the object
             if (remainingDistance < 40.0f)
             {
-                //   Debug.Log("Hello haha");
                 float randomDelay = Random.Range(15.0f, 30.0f); // Change values to your preferred range
                 Invoke("MoveToDespawn", randomDelay); // Invoke MoveToDespawn method after randomDelay seconds
                 //availableParkingSpaces.Add(nearestParkingSpace);
                 //nearestParkingSpace.tag = "ParkingSpace";
             }
-
-            // if (remainingDistance < 0.1f) // Check for a very close distance to the 'Despawn' location
-            // {
-            // Debug.Log("Destroy");
-            // Destroy(gameObject); // Destroy the car GameObject
-            // }
+           
         }
 
         if (navMeshAgent.hasPath && (isParked == null))
@@ -156,23 +147,12 @@ public class CarNavMesh : MonoBehaviour
             GameObject.Destroy(gameObject);
         }
 
+        if (other.CompareTag("ParkingSpace"))
+        {
+            other.tag = "Parked";
+        }
+
         
         
     }
-
-//     private void OnTriggerExit(Collider other)
-// {
-//     Debug.Log("Exited trigger");
-    
-//     // Check if the exited collider has the tag "ParkingSpace"
-//     if (other.CompareTag("ParkingSpace"))
-//     {
-//         // Add the parking space back to the available list
-//         availableParkingSpaces.Add(other.gameObject);
-
-//         // Change the tag of the exited parking spot to "ParkingSpace"
-//         other.gameObject.tag = "ParkingSpace";
-//     }
-// }
-
 }
