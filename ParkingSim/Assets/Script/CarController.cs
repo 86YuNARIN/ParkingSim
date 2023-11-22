@@ -10,6 +10,8 @@ public class CarController : MonoBehaviour
     private float steerAngle;
     private bool isBreaking;
 
+    private bool isTurboBoosting; // Added variable for turbo boost
+
     public WheelCollider frontLeftWheelCollider;
     public WheelCollider frontRightWheelCollider;
     public WheelCollider rearLeftWheelCollider;
@@ -20,7 +22,10 @@ public class CarController : MonoBehaviour
     public Transform rearRightWheelTransform;
 
     public float maxSteeringAngle = 30f;
-    public float motorForce = 50f;
+    public float motorForce = 500f;
+
+    public float turboBoostFactor = 500f; // Added variable for turbo boost factor
+
     public float brakeForce = 0f;
 
 
@@ -37,6 +42,8 @@ public class CarController : MonoBehaviour
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
         isBreaking = Input.GetKey(KeyCode.Space);
+        // Check for turbo boost input (Shift key)
+        isTurboBoosting = Input.GetKey(KeyCode.LeftShift);
     }
 
     private void HandleSteering()
@@ -48,10 +55,11 @@ public class CarController : MonoBehaviour
 
     private void HandleMotor()
     {
-        frontLeftWheelCollider.motorTorque = verticalInput * 30 * motorForce;
-        frontRightWheelCollider.motorTorque = verticalInput * 30 * motorForce;
+        float currentMotorForce = isTurboBoosting ? motorForce * turboBoostFactor : motorForce;
+        frontLeftWheelCollider.motorTorque = verticalInput * 300 * motorForce;
+        frontRightWheelCollider.motorTorque = verticalInput * 300 * motorForce;
 
-        brakeForce = isBreaking ? 6000f : 0f;
+        brakeForce = isBreaking ? 20000f : 0f;
         frontLeftWheelCollider.brakeTorque = brakeForce;
         frontRightWheelCollider.brakeTorque = brakeForce;
         rearLeftWheelCollider.brakeTorque = brakeForce;

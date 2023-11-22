@@ -3,7 +3,7 @@ using UnityEngine.AI;
 
 public class DestroyOnTrigger : MonoBehaviour
 {
-    /*private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision collision)
     {
         // Check if the entering object has a specific tag (you can customize this)
         if (collision.collider.CompareTag("Car"))
@@ -13,23 +13,23 @@ public class DestroyOnTrigger : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collision collision)
+    /*private void OnTriggerEnter(Collision collision)
     {
         // Check if the entering object has a specific tag (you can customize this)
         if (collision.collider.CompareTag("Car"))
+        {
+            // Deactivate the entering object (make it disappear)
+            collision.gameObject.SetActive(false);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        // Check if the entering object has a specific tag (you can customize this)
+        if (collision.collider.CompareTag("Player"))
         {
             // Deactivate the entering object (make it disappear)
             collision.gameObject.SetActive(false);
         }
     }*/
-
-    private void OnTriggerEnter(Collider other)
-    {
-        // Check if the entering object has a specific tag (you can customize this)
-        if (other.CompareTag("Car"))
-        {
-            // Make the entering object disappear
-            Destroy(other.gameObject);
-        }
-    }
 }
