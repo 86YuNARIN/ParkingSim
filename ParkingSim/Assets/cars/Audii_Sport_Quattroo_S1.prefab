@@ -591,7 +591,8 @@ GameObject:
   - component: {fileID: 2767213228840365827}
   - component: {fileID: -7412120616602462147}
   - component: {fileID: 2599134388419356536}
-  m_Layer: 0
+  - component: {fileID: 6229014765403018345}
+  m_Layer: 3
   m_Name: Audii_Sport_Quattroo_S1
   m_TagString: Car
   m_Icon: {fileID: 0}
@@ -650,7 +651,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movePositionTransform: {fileID: 8108044827374871692, guid: c91665e7c3fa13d43a6a41f9f190820d, type: 3}
-  remainingDistance: 0
+  minDistance: 10
+--- !u!114 &6229014765403018345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4150509835923955680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5cbb584a8563034fb022766edbb5717, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  separationDistance: 2
 --- !u!1 &6090592442741303448
 GameObject:
   m_ObjectHideFlags: 0

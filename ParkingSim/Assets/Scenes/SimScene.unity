@@ -1074,6 +1074,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Despawn
       objectReference: {fileID: 0}
+    - target: {fileID: 8108044827374871692, guid: c91665e7c3fa13d43a6a41f9f190820d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 8795958761983935234, guid: c91665e7c3fa13d43a6a41f9f190820d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -985
@@ -1481,6 +1485,18 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 4977863622370914674, guid: 9a961eed20c7dc04c81d937320d8395b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.88236
+      objectReference: {fileID: 0}
+    - target: {fileID: 4977863622370914674, guid: 9a961eed20c7dc04c81d937320d8395b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 4977863622370914674, guid: 9a961eed20c7dc04c81d937320d8395b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0000000023465
+      objectReference: {fileID: 0}
     - target: {fileID: 5205827726493279127, guid: 9a961eed20c7dc04c81d937320d8395b, type: 3}
       propertyPath: m_TagString
       value: ParkingSpace
@@ -1722,6 +1738,9 @@ PrefabInstance:
     - {fileID: 7227682709248085588, guid: 9a961eed20c7dc04c81d937320d8395b, type: 3}
     - {fileID: 2740956733014091059, guid: 9a961eed20c7dc04c81d937320d8395b, type: 3}
     - {fileID: 1703591586471524733, guid: 9a961eed20c7dc04c81d937320d8395b, type: 3}
+    - {fileID: 7025077216859240688, guid: 9a961eed20c7dc04c81d937320d8395b, type: 3}
+    - {fileID: 3362885571543956169, guid: 9a961eed20c7dc04c81d937320d8395b, type: 3}
+    - {fileID: 4860082136321167715, guid: 9a961eed20c7dc04c81d937320d8395b, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5954841477826229615, guid: 9a961eed20c7dc04c81d937320d8395b, type: 3}

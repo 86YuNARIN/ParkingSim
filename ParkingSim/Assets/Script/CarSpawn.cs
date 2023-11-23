@@ -7,6 +7,7 @@ public class CarSpawn : MonoBehaviour
     private SimManager _simManager;
     [SerializeField] GameObject[] _spawnPoints;
     [SerializeField] GameObject[] _cars;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -16,6 +17,17 @@ public class CarSpawn : MonoBehaviour
 
         StartCoroutine(SpawnNextCar());
         StartCoroutine(SpawnRateChanger());
+
+                for (int i = 0; i < 32; i++)
+        {
+           Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Car"), i, false);
+        }
+
+        // Disable collisions within the "Car" layer
+        for (int i = 0; i < _cars.Length; i++)
+        {
+            _cars[i].layer = LayerMask.NameToLayer("Car");
+        }
     }
 
     IEnumerator SpawnNextCar()
@@ -42,8 +54,8 @@ public class CarSpawn : MonoBehaviour
         rigidbody.useGravity = false; // Disable gravity for the rigidbody
         rigidbody.angularDrag = 0f; // Set angular drag to 0
 
-        rigidbody.drag = 5f; // Adjust linear drag value (experiment with values)
-        rigidbody.angularDrag = 5f; // Adjust angular drag value (experiment with values)
+        rigidbody.drag = 10f; // Adjust linear drag value (experiment with values)
+        rigidbody.angularDrag = 10f; // Adjust angular drag value (experiment with values)
         // Freeze rotation along certain axes if needed
         rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
         rigidbody.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
@@ -57,7 +69,7 @@ public class CarSpawn : MonoBehaviour
         if (collider == null)
         {
             collider = newCar.AddComponent<BoxCollider>();
-            collider.size = new Vector3(1.72f, 0.54f, 2.87f);
+            collider.size = new Vector3(3.03f, 2.11f, 5.71f);
             collider.isTrigger = false; // Set the collider as a trigger for collision detection
         }
 
