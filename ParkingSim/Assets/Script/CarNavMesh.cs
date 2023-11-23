@@ -149,10 +149,10 @@ public class CarNavMesh : MonoBehaviour
         if (other.CompareTag("Despawn"))
         {
             SimManager simManager = FindObjectOfType<SimManager>();
-            // if (simManager != null)
-            // {
-            //     simManager.CarDespawned((bool)isParked);
-            // }
+            if (simManager != null)
+            {
+                simManager.CarDespawned((bool)isParked);
+            }
             GameObject.Destroy(gameObject);
         }
         // else if (other.CompareTag("Parking Space"))
