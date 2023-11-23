@@ -7,12 +7,12 @@ TagManager:
   - Car
   - Despawn
   - ParkingSpace
-  - Parked
+  - Occupied
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Car
   - Water
   - UI
   - 
