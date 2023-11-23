@@ -5,11 +5,14 @@ TagManager:
   serializedVersion: 2
   tags:
   - Car
+  - Despawn
+  - ParkingSpace
+  - Occupied
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Car
   - Water
   - UI
   - 
